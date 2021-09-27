@@ -83,11 +83,7 @@ static uint8_t readFile(uint8_t* dataIN)
                                         
         fseek(filePtr, 0, SEEK_SET);
         
-
-        fscanf_s(filePtr, CIPHERTEXT_INPUT_FORMAT, CTI.tag, 10, CTI.text, 64);
-        system("cls");
-        printf("tag >> %s\nciphertext >> %s", CTI.tag, CTI.text);
-        getch();
+        /* @todo implement a function to search for input tag inside ciphersheet and scan the written cipher text */
         return EXIT_SUCCESS;
     }
     
