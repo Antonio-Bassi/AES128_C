@@ -13,7 +13,7 @@
 static uint8_t subBytes(uint8_t byte)
 {
     /** @brief      performs sub-bytes transformation on given byte.
-     *  @param byte byte entity to be mapped to the s-Box.
+     *  @param byte byte to be mapped to the s-Box.
     */
     uint8_t sByte = 0;
 
@@ -27,7 +27,7 @@ static uint8_t subBytes(uint8_t byte)
 static uint32_t subWord(uint32_t doubleWord)
 {
     /** @brief              Performs sub-Bytes transformation on 32-bit word.
-     *  @param doubleWord   32-bit entity to be mapped to the s-Box.
+     *  @param doubleWord   32-bit word to be mapped to the s-Box.
     */
 
    uint8_t byteNum = 0;
@@ -47,7 +47,7 @@ static uint32_t subWord(uint32_t doubleWord)
 
 static void subState(uint8_t (*stateBuffer)[N_KEY])
 {
-    /** @brief             performs sub-bytes transformation on given state.
+    /** @brief             Performs sub-bytes transformation on given state.
      *  @param stateBuffer pointer to first array of state entity to be mapped to the s-Box
      * 
     */
@@ -63,8 +63,8 @@ static void subState(uint8_t (*stateBuffer)[N_KEY])
 
 static uint8_t invSubBytes(uint8_t sByte)
 {
-    /** @brief          performs sub-bytes transformation on given byte.
-     *  @param sByte    byte entity to be mapped back from the s-Box.
+    /** @brief          performs inverse sub-bytes transformation on given byte.
+     *  @param sByte    byte to be mapped back from the s-Box.
     */
     uint8_t byte = 0;
 
@@ -76,8 +76,8 @@ static uint8_t invSubBytes(uint8_t sByte)
 
 static uint32_t invSubWord(uint32_t sDoubleWord)
 {
-    /** @brief              Performs sub-Bytes transformation on 32-bit word.
-     *  @param sDoubleWord  32-bit entity to be mapped back from the s-box.
+    /** @brief              Performs inverse sub-Bytes transformation on 32-bit word.
+     *  @param sDoubleWord  32-bit word to be mapped back from the s-box.
     */
 
    uint8_t byteNum = 0;
@@ -97,7 +97,7 @@ static uint32_t invSubWord(uint32_t sDoubleWord)
 
 static void invSubState(uint8_t (*stateBuffer)[N_KEY])
 {
-    /** @brief             performs sub-bytes transformation on given state.
+    /** @brief             Performs inverse sub-bytes transformation on given state.
      *  @param stateBuffer pointer to first array of state entity to be mapped back from the s-Box
      * 
     */
