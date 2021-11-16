@@ -1,5 +1,5 @@
 # About this repository:
-AES128_C is an implementation of the Advanced Encryption Standards using 128-bit keys, according to the Federal Information Processing Standards-197 (FIPS197) using C language.
+AES128_C is an implementation of the Advanced Encryption Standards using 128-bit keys in accordance to the Federal Information Processing Standards-197 (FIPS197) using C language.
 
 # Progress:
 The following steps marked with a ✔️ are already implemented and have been tested and steps marked with ⚠️ need to be implemented and tested.
