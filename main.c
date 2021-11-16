@@ -110,6 +110,41 @@ int main(void)
             return EXIT_SUCCESS; 
         }
 
+        /* Hidden Debug Function */ 
+        else if(userCursor == 4)
+        {
+            system("cls");
+
+            printf(" ---------------- Algorithm Demonstration ---------------- \n -------------------- Data Encryption -------------------- \n ");
+            printf("Enter data to be enciphered\nInput >> ");
+            safeScanf(&dataIN[0]);
+            printf("\nInsert your key\nInput >> ");
+            safeScanf(&userKey[0]);
+            beginCipher( &dataIN[0], &dataOUT[0], &userKey[0] );
+            printf("plaintext >> ");
+            for (uint8_t I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
+            {
+                printf(" %c ", dataOUT[I]);
+            }
+            printf("\nPress any key to continue.");
+            getch();
+            system("cls");
+
+            printf(" ---------------- Algorithm Demonstration ---------------- \n -------------------- Data Decryption -------------------- \n ");
+            printf("Enter key\nInput >> ");
+            safeScanf(&userKey[0]);
+            beginInverseCipher( &dataOUT[0], &output[0], &userKey[0] );
+            printf("plaintext >> ");
+            for (uint8_t I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
+            {
+                printf(" %c ", output[I]);
+            } 
+            printf("\nPress any key to continue.");
+            getch();
+            cleanBuffer( &output[0] );
+            system("cls");
+        }
+
         else; /* restart the loop */
     } 
 }
