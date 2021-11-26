@@ -16,7 +16,7 @@ static void safeScanf(u8* dataIN)
     u8 ch = 0;
     u8 I = 0;
 
-    while( I < 4 * N_KEY * N_BLOCKS )
+    while( I < MAX_SIZE )
     {
         ch = getch();
         if( ch == 0x0D) 
@@ -76,7 +76,7 @@ static void cleanKey(u8* userKey)
     /** @brief          cleans user Key buffer.
      *  @param userKey  pointer to user key array.
     */
-   for (u8 I = 0; I < 4 * N_BLOCKS; I++)
+   for (u8 I = 0; I < MAX_SIZE; I++)
    {
        userKey[I] = 0;
    }

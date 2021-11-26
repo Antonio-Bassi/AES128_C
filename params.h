@@ -24,10 +24,12 @@
 #define INVERSE_MAP 0X05    // Inverse S-Box constant    
 #define RIJNDAEL_P  0x11B   // Rijndael's polynomial
 
-#define N_KEY       4       // Number of Words present inside given Key
-#define N_BLOCKS    4       // Number of 32 bit data blocks
-#define N_ROUNDS    10      // Number of cryptography rounds
+#define N_KEY       4                       // Number of Words present inside given Key
+#define N_BLOCKS    4                       // Number of 32 bit data blocks
+#define N_ROUNDS    10                      // Number of cryptography rounds
+#define MAX_SIZE    4 * N_KEY * N_BLOCKS    // Max size of key and ciphertext arrays.
 
+/* Error codes */
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 #define EXIT_USER    2
@@ -59,7 +61,7 @@ typedef signed int s32;
 
 /* Source Codes */
 #include "operations.c"
-#include "filesystem.c"
+#include "files.c"
 #include "routines.c"
 
 #endif
