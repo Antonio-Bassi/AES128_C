@@ -17,13 +17,13 @@ int main(void)
 {
     int userCursor = 0;
 
-    uint8_t wFlag = 0;
-    uint8_t rFlag = 0;
+    u8 wFlag = 0;
+    u8 rFlag = 0;
 
-    uint8_t userKey[4 * N_BLOCKS] = {0}; 
-    uint8_t dataIN[4 * N_KEY * N_BLOCKS] = {0};
-    uint8_t dataOUT[4 * N_KEY * N_BLOCKS] = {0};
-    uint8_t output[4 * N_KEY * N_BLOCKS] = {0};
+    u8 userKey[4 * N_BLOCKS] = {0}; 
+    u8 dataIN[4 * N_KEY * N_BLOCKS] = {0};
+    u8 dataOUT[4 * N_KEY * N_BLOCKS] = {0};
+    u8 output[4 * N_KEY * N_BLOCKS] = {0};
     
     while ( 1 )
     {
@@ -76,7 +76,7 @@ int main(void)
                 requestKey(&userKey[0]);
                 beginInverseCipher(&dataOUT[0], &output[0], &userKey[0]); 
                 printf("plaintext >> ");
-                for (uint8_t I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
+                for (u8 I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
                 {
                     printf(" %c ", output[I]);
                 }
@@ -122,7 +122,7 @@ int main(void)
             safeScanf(&userKey[0]);
             beginCipher( &dataIN[0], &dataOUT[0], &userKey[0] );
             printf("plaintext >> ");
-            for (uint8_t I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
+            for (u8 I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
             {
                 printf(" %c ", dataOUT[I]);
             }
@@ -135,7 +135,7 @@ int main(void)
             safeScanf(&userKey[0]);
             beginInverseCipher( &dataOUT[0], &output[0], &userKey[0] );
             printf("plaintext >> ");
-            for (uint8_t I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
+            for (u8 I = 0; I < 4 * N_KEY * N_BLOCKS; I++)
             {
                 printf(" %c ", output[I]);
             } 

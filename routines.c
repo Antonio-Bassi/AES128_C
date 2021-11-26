@@ -8,7 +8,7 @@
  ************************************************************************************** 
 */
 
-void requestInput(uint8_t* dataIN, uint8_t* userKey)
+void requestInput(u8* dataIN, u8* userKey)
 {
     /** @brief              requests user input and key
      *  @param dataIN       pointer to data input array.
@@ -25,7 +25,7 @@ void requestInput(uint8_t* dataIN, uint8_t* userKey)
     return;
 }
 
-void requestKey(uint8_t* userKey)
+void requestKey(u8* userKey)
 {
     /** @brief              requests user key for decryption.
      *  @param userKey      pointer to key array.
@@ -36,17 +36,17 @@ void requestKey(uint8_t* userKey)
     return;
 }
 
-void beginCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
+void beginCipher(u8* dataIN, u8* dataOUT, u8* userKey)
 {
     /** @brief              starts AES cryptography process.
      *  @param dataIn       pointer to input array.
      *  @param dataOUT      pointer to output array.
      *  @param userKey      pointer to userKey array.
     */
-    uint8_t memOffset = 0;    
-    uint8_t stateBuffer[N_KEY][N_BLOCKS] = {0};
-    uint32_t keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
-    uint8_t cipherIN[N_KEY * N_BLOCKS] = {0};
+    u8 memOffset = 0;    
+    u8 stateBuffer[N_KEY][N_BLOCKS] = {0};
+    u32 keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
+    u8 cipherIN[N_KEY * N_BLOCKS] = {0};
 
     keyExpansion(&userKey[0], &keySched[0]);
     while ( memOffset < N_BLOCKS )
@@ -56,7 +56,7 @@ void beginCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
 
         /* the cryptography begins here */
         addRoundKey(0, stateBuffer, &keySched[0]);
-        for(uint8_t round = 1; round < N_ROUNDS; round++)
+        for(u8 round = 1; round < N_ROUNDS; round++)
         {
             subState(stateBuffer);
             shiftRows(stateBuffer);
@@ -75,7 +75,7 @@ void beginCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
     return;
 }
 
-void beginInverseCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
+void beginInverseCipher(u8* dataIN, u8* dataOUT, u8* userKey)
 {
     /** @brief              starts AES decryption process.
      *  @param dataIn       pointer to input array.
@@ -83,10 +83,10 @@ void beginInverseCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
      *  @param stateBuffer  pointer to stateBuffer arrays.
     */
 
-    uint8_t memOffset = 0;    
-    uint8_t stateBuffer[N_KEY][N_BLOCKS] = {0};
-    uint32_t keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
-    uint8_t cipherIN[N_KEY * N_BLOCKS] = {0};
+    u8 memOffset = 0;    
+    u8 stateBuffer[N_KEY][N_BLOCKS] = {0};
+    u32 keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
+    u8 cipherIN[N_KEY * N_BLOCKS] = {0};
 
     keyExpansion(&userKey[0], &keySched[0]);
     while (memOffset < N_BLOCKS)
@@ -95,7 +95,7 @@ void beginInverseCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
         state(&cipherIN[0], stateBuffer);
 
         addRoundKey(10, stateBuffer, &keySched[0]);
-        for(uint8_t round = N_ROUNDS - 1; round > 0; round--)
+        for(u8 round = N_ROUNDS - 1; round > 0; round--)
         {
             invShiftRows(stateBuffer);
             invSubState(stateBuffer);
@@ -113,7 +113,7 @@ void beginInverseCipher(uint8_t* dataIN, uint8_t* dataOUT, uint8_t* userKey)
     return;
 }
 
-uint8_t writeCipherSheet(uint8_t* dataOUT)
+u8 writeCipherSheet(u8* dataOUT)
 {
     int option = 0;
 
@@ -128,7 +128,7 @@ uint8_t writeCipherSheet(uint8_t* dataOUT)
     else return EXIT_UNKNWN;
 }
 
-uint8_t readCipherSheet(uint8_t* dataIN)
+u8 readCipherSheet(u8* dataIN)
 {
     int option = 0;
 

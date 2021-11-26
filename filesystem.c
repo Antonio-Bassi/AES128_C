@@ -20,12 +20,12 @@ typedef struct ciphertext
           
 }ciphertext;
 
-static uint8_t writeFile(uint8_t* dataOUT)
+static u8 writeFile(u8* dataOUT)
 {
     FILE *filePtr;
 
     ciphertext CTO; 
-    uint8_t I = 0;
+    u8 I = 0;
 
     system("cls");
     printf("Enter filename.\nInput >> ");
@@ -58,7 +58,7 @@ static uint8_t writeFile(uint8_t* dataOUT)
     return EXIT_UNKNWN;
 }
 
-static uint8_t readFile(uint8_t* dataIN)
+static u8 readFile(u8* dataIN)
 {
     FILE* filePtr;
 

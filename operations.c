@@ -10,12 +10,12 @@
 
 #include "operators.c"
 
-static uint8_t subBytes(uint8_t byte)
+static u8 subBytes(u8 byte)
 {
     /** @brief      performs sub-bytes transformation on given byte.
      *  @param byte byte to be mapped to the s-Box.
     */
-    uint8_t sByte = 0;
+    u8 sByte = 0;
 
     sByte = byte;
     sByte = GF256_inv(byte);
@@ -24,36 +24,36 @@ static uint8_t subBytes(uint8_t byte)
     
 }
 
-static uint32_t subWord(uint32_t doubleWord)
+static u32 subWord(u32 doubleWord)
 {
     /** @brief              Performs sub-Bytes transformation on 32-bit word.
      *  @param doubleWord   32-bit word to be mapped to the s-Box.
     */
 
-   uint8_t byteNum = 0;
-   uint8_t tmp = 0;
-   uint32_t sDoubleWord = 0;
+   u8 byteNum = 0;
+   u8 tmp = 0;
+   u32 sDoubleWord = 0;
 
     while (byteNum < N_KEY)
     {
-        tmp = ( uint8_t )( ( doubleWord ) >> ( byteNum * 8 ) );
+        tmp = ( u8 )( ( doubleWord ) >> ( byteNum * 8 ) );
         tmp = subBytes(tmp);
-        sDoubleWord |= ( ( uint32_t ) tmp) << ( byteNum * 8 );
+        sDoubleWord |= ( ( u32 ) tmp) << ( byteNum * 8 );
         byteNum++;      
     }
     
     return sDoubleWord;
 }
 
-static void subState(uint8_t (*stateBuffer)[N_KEY])
+static void subState(u8 (*stateBuffer)[N_KEY])
 {
     /** @brief             Performs sub-bytes transformation on given state.
      *  @param stateBuffer pointer to first array of state entity to be mapped to the s-Box
      * 
     */
-    for (uint8_t R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_KEY; R++)
     {
-        for (uint8_t C = 0; C < N_BLOCKS; C++)
+        for (u8 C = 0; C < N_BLOCKS; C++)
         {
             stateBuffer[R][C] = subBytes(stateBuffer[R][C]);
         }
@@ -61,12 +61,12 @@ static void subState(uint8_t (*stateBuffer)[N_KEY])
     return;
 }
 
-static uint8_t invSubBytes(uint8_t sByte)
+static u8 invSubBytes(u8 sByte)
 {
     /** @brief          performs inverse sub-bytes transformation on given byte.
      *  @param sByte    byte to be mapped back from the s-Box.
     */
-    uint8_t byte = 0;
+    u8 byte = 0;
 
     byte = sByte;
     byte = ( circularShift(byte, 1) ^ circularShift(byte,3) ^ circularShift(byte,6) ) ^ INVERSE_MAP;
@@ -74,36 +74,36 @@ static uint8_t invSubBytes(uint8_t sByte)
     return byte;
 }
 
-static uint32_t invSubWord(uint32_t sDoubleWord)
+static u32 invSubWord(u32 sDoubleWord)
 {
     /** @brief              Performs inverse sub-Bytes transformation on 32-bit word.
      *  @param sDoubleWord  32-bit word to be mapped back from the s-box.
     */
 
-   uint8_t byteNum = 0;
-   uint8_t tmp = 0;
-   uint32_t doubleWord = 0;
+   u8 byteNum = 0;
+   u8 tmp = 0;
+   u32 doubleWord = 0;
 
     while (byteNum < N_KEY)
     {
-        tmp = ( uint8_t )( ( doubleWord ) >> ( byteNum * 8 ) );
+        tmp = ( u8 )( ( doubleWord ) >> ( byteNum * 8 ) );
         tmp = invSubBytes(tmp);
-        doubleWord |= ( ( uint32_t ) tmp) << ( byteNum * 8 );
+        doubleWord |= ( ( u32 ) tmp) << ( byteNum * 8 );
         byteNum++;      
     }
     
     return doubleWord;
 }
 
-static void invSubState(uint8_t (*stateBuffer)[N_KEY])
+static void invSubState(u8 (*stateBuffer)[N_KEY])
 {
     /** @brief             Performs inverse sub-bytes transformation on given state.
      *  @param stateBuffer pointer to first array of state entity to be mapped back from the s-Box
      * 
     */
-    for (uint8_t R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_KEY; R++)
     {
-        for (uint8_t C = 0; C < N_BLOCKS; C++)
+        for (u8 C = 0; C < N_BLOCKS; C++)
         {
             stateBuffer[R][C] = invSubBytes(stateBuffer[R][C]);
         }
@@ -111,54 +111,54 @@ static void invSubState(uint8_t (*stateBuffer)[N_KEY])
     return;
 }
 
-static void shiftRows(uint8_t (*stateBuffer)[N_KEY])
+static void shiftRows(u8 (*stateBuffer)[N_KEY])
 {
     /** @brief              shifts rows from state entity.
      *  @param stateBuffer  pointer to first array of state entity.
     */
-    uint32_t tmp = 0;
+    u32 tmp = 0;
 
-    for (uint8_t R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_KEY; R++)
     {
         tmp = wordRow(stateBuffer, R);
         tmp = cyclicalShift(tmp, R);
         
-        for(uint8_t C = 0; C < N_BLOCKS; C++)
+        for(u8 C = 0; C < N_BLOCKS; C++)
         {
-            stateBuffer[R][C] = (uint8_t)(tmp >> 8*C); 
+            stateBuffer[R][C] = (u8)(tmp >> 8*C); 
         }
     }
     return;
 }
 
-static void invShiftRows(uint8_t (*stateBuffer)[N_KEY])
+static void invShiftRows(u8 (*stateBuffer)[N_KEY])
 {
     /** @brief              performs the inverse shift rows on state entity
      *  @param stateBuffer  pointer to first array of state entity.
     */
 
-   uint32_t tmp = 0;
+   u32 tmp = 0;
 
-   for (uint8_t R = 0; R < N_KEY; R++)
+   for (u8 R = 0; R < N_KEY; R++)
     {
        tmp = wordRow(stateBuffer, R);
        tmp = invCyclicalShift(tmp, R);
 
-        for (uint8_t C = 0; C < N_BLOCKS; C++)
+        for (u8 C = 0; C < N_BLOCKS; C++)
         {
-            stateBuffer[R][C] = (uint8_t)(tmp >> 8*C);
+            stateBuffer[R][C] = (u8)(tmp >> 8*C);
         }
     }
     return;
 }
 
-static void mixColumns(uint8_t (*stateBuffer)[N_KEY])
+static void mixColumns(u8 (*stateBuffer)[N_KEY])
 {
     /** @brief              perform mix columns transformations on state.
      *  @param stateBuffer  pointer to first array of state entity.
     */
-    uint8_t C = 0;
-    uint8_t tmp[N_BLOCKS][N_KEY] = {0};
+    u8 C = 0;
+    u8 tmp[N_BLOCKS][N_KEY] = {0};
 
     matcpy(stateBuffer, tmp);
     
@@ -173,13 +173,13 @@ static void mixColumns(uint8_t (*stateBuffer)[N_KEY])
     return;
 }
 
-static void invMixColumns(uint8_t (*stateBuffer)[N_KEY])
+static void invMixColumns(u8 (*stateBuffer)[N_KEY])
 {
     /** @brief              perform the inverse mix columns transformations on state.
      *  @param stateBuffer  pointer to first array of state entity.
     */
-    uint8_t C = 0;
-    uint8_t tmp[N_BLOCKS][N_KEY] = {0};
+    u8 C = 0;
+    u8 tmp[N_BLOCKS][N_KEY] = {0};
 
     matcpy(stateBuffer, tmp);
 
@@ -194,18 +194,18 @@ static void invMixColumns(uint8_t (*stateBuffer)[N_KEY])
     return;
 }
 
-static void keyExpansion(uint8_t* userKey, uint32_t* keySched)
+static void keyExpansion(u8* userKey, u32* keySched)
 {
     /** @brief          performs the key expansion algorithm from user key.
      *  @param userKey  pointer to user key array.
      *  @param keySched pointer to key schedule array.
     */
-    uint32_t tmp = 0;
-    uint8_t I = 0;
+    u32 tmp = 0;
+    u8 I = 0;
 
     while ( I < N_KEY )
     {
-        keySched[I] = ( uint32_t )( userKey[4*I] | userKey[4*I + 1] << 8 | userKey[4*I + 2] << 16 | userKey[4*I + 3] << 24 );
+        keySched[I] = ( u32 )( userKey[4*I] | userKey[4*I + 1] << 8 | userKey[4*I + 2] << 16 | userKey[4*I + 3] << 24 );
         I++;
     }
 
@@ -222,7 +222,7 @@ static void keyExpansion(uint8_t* userKey, uint32_t* keySched)
     }
 }
 
-static void addRoundKey(uint8_t roundNum, uint8_t (*stateBuffer)[N_KEY], uint32_t* keySched)
+static void addRoundKey(u8 roundNum, u8 (*stateBuffer)[N_KEY], u32* keySched)
 {
     /** @brief              adds round key from key schedule to given state
      *  @param roundNum     ongoing cryptography round.
@@ -230,17 +230,17 @@ static void addRoundKey(uint8_t roundNum, uint8_t (*stateBuffer)[N_KEY], uint32_
      *  @param keySched     pointer to key schedule array.
      * 
     */
-    uint8_t keyIndex = roundNum * N_BLOCKS;
-    uint32_t tmp = 0;
+    u8 keyIndex = roundNum * N_BLOCKS;
+    u32 tmp = 0;
 
-    for (uint8_t C = 0; C < N_KEY; C++)
+    for (u8 C = 0; C < N_KEY; C++)
     {
         tmp = wordColumn(stateBuffer, C);
     	tmp ^= keySched[keyIndex];
 
-        for (uint8_t R = 0; R < N_BLOCKS; R++)
+        for (u8 R = 0; R < N_BLOCKS; R++)
         {
-            stateBuffer[R][C] = ( uint8_t )( tmp >> 8 * R );
+            stateBuffer[R][C] = ( u8 )( tmp >> 8 * R );
         }
 
         keyIndex++;
