@@ -17,7 +17,9 @@ The following steps marked with a ✔️  are already implemented and have been 
 Hello and welcome to this repository page. Feel free to get in contact with me or to contribute to this project. It is a small personal project that I intend to make it grow.
 I am an electrical engineer specialized in the telecommunications field and I just arrived at the work market. My knowledge around programming practices in industry is really limited, so any advice is greatly appreciated.
 My emails are listed bellow:
-:incoming envelope: antoniovitor.gb@gmail.com
-:incoming envelope: antonio.bassi@sprace.org.br
+
+:incoming_envelope: antoniovitor.gb@gmail.com
+
+:incoming_envelope: antonio.bassi@sprace.org.br
 
 Thank you for reading this far! :)
