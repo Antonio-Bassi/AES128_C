@@ -15,7 +15,7 @@
 
 int main(void)
 {
-    int userCursor = 0;
+    int option = 0;
 
     u8 wFlag = 0;
     u8 rFlag = 0;
@@ -27,12 +27,12 @@ int main(void)
     
     while ( 1 )
     {
-        system("cls");
-        printf("Personal cryptographer v0.0\n");
-        printf("Welcome, what do you wish to do?\n(1) Encrypt data\n(2) Decrypt data\n(3) Quit\nInput >> ");
-        scanf("%d", &userCursor);
+        system(SYS_CLI);
+        printf(WELCOME_PROMPT);
+        printf(MENU_PROMPT);
+        scanf("%d", &option);
 
-        if( userCursor == 1)
+        if( option == 1)
         {
             /* Encryption routines go here */
             requestInput(&dataIN[0], &userKey[0]);
@@ -42,32 +42,34 @@ int main(void)
             if(wFlag == EXIT_SUCCESS)
             {
                 cleanBuffer(&dataOUT[0]);
-                printf("Ciphertext successfully written.\nPress any key to continue.");
-                getch();
+                printf(W_SUCCESS_PROMPT);
+                getchar();
             }
             else if(wFlag == EXIT_FAILURE)
             {
                 cleanBuffer(&dataOUT[0]);
-                printf("Ciphertext was not written due to NULL file pointer.\nPress any key to continue.");
-                getch();
+                printf(W_FAILURE_PROMPT);
+                getchar();
             }
             else if(wFlag == EXIT_USER)
             {
                 cleanBuffer(&dataOUT[0]);
-                printf("Ciphertext successfully discarded.\nPress any key to continue.");
-                getch();
+                printf(W_DISCARD_PROMPT);
+                getchar();
+                getchar();
+
             }
             else if(wFlag == EXIT_UNKNWN)
             {
                 cleanBuffer(&dataOUT[0]);
-                printf("Ciphertext was not written due to unknown error.\nPress any key to continue.");
-                getch();
+                printf(W_UNKNOWN_PROMPT);
+                getchar();
             }
             else; /* Do Nothing */
-            userCursor = 0;
+            option = 0;
         }
 
-        else if(userCursor == 2)
+        else if(option == 2)
         {
             /* Decryption routines go here */
             rFlag = readCipherSheet(&dataIN[0]);
@@ -80,41 +82,40 @@ int main(void)
                 {
                     printf(" %c ", output[I]);
                 }
-                printf("\nPress any key to continue.");
-                getch();
+                printf(KEY_PROMPT);
+                getchar();
             }
             else if(rFlag == EXIT_FAILURE)
             {
-                printf("No ciphersheet found or file Pointer is NULL.\nTo create a ciphersheet use option (1) Encrypt data.\nPress any key to continue.");
-                getch();
+                printf(R_FAILURE_PROMPT);
+                getchar();
             }
             else if(rFlag == EXIT_USER)
             {
-                printf("Ciphersheet was not read.\nPress any key to continue.");
-                getch();    
+                printf(R_USEREXIT_PROMPT);
+                getchar();    
             }
             else if(rFlag == EXIT_UNKNWN)
             {
-                printf("Ciphersheet could not be read due to unknown error.\nPress any key to continue.");
-                getch();
+                printf(R_UNKNOWN_PROMPT);
+                getchar();
             }
-            userCursor = 0;
+            option = 0;
         }
 
-        else if(userCursor == 3)
+        else if(option == 3)
         {
-            system("cls");
-            printf("Program terminated, goodbye. (/'A')/\nPress any key to leave.\n");
-            getch();
-            system("cls");
+            system(SYS_CLI);
+            printf(GOODBYE_PROMPT);
+            getchar();getchar();
+            system(SYS_CLI);
             return EXIT_SUCCESS; 
         }
 
         /* Hidden Debug Function */ 
-        else if(userCursor == 4)
+        else if(option == 4)
         {
-            system("cls");
-
+            system(SYS_CLI);
             printf(" ---------------- Algorithm Demonstration ---------------- \n -------------------- Data Encryption -------------------- \n ");
             printf("Enter data to be enciphered\nInput >> ");
             safeScanf(&dataIN[0]);
@@ -126,9 +127,9 @@ int main(void)
             {
                 printf(" %c ", dataOUT[I]);
             }
-            printf("\nPress any key to continue.");
-            getch();
-            system("cls");
+            printf("\nPress <Enter> key to continue.");
+            getchar();
+            system(SYS_CLI);
 
             printf(" ---------------- Algorithm Demonstration ---------------- \n -------------------- Data Decryption -------------------- \n ");
             printf("Enter key\nInput >> ");
@@ -139,12 +140,12 @@ int main(void)
             {
                 printf(" %c ", output[I]);
             } 
-            printf("\nPress any key to continue.");
-            getch();
+            printf("\nPress <Enter> key to continue.");
+            getchar();
             cleanBuffer( &output[0] );
-            system("cls");
+            system(SYS_CLI);
         }
 
         else; /* restart the loop */
-    } 
+    }
 }

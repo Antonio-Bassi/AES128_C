@@ -14,11 +14,11 @@ void requestInput(u8* dataIN, u8* userKey)
      *  @param dataIN       pointer to data input array.
      *  @param userKey      pointer to key array.
     */
-    system("cls"); 
+    system("clear"); 
     printf("Enter data to be enciphered\nInput >> ");
     safeScanf(&dataIN[0]);
 
-    system("cls"); 
+    system("clear"); 
     printf("Insert your key\nInput >> ");
     safeScanf(&userKey[0]);
     
@@ -30,7 +30,7 @@ void requestKey(u8* userKey)
     /** @brief              requests user key for decryption.
      *  @param userKey      pointer to key array.
     */
-    system("cls");
+    system("clear");
     printf("Enter key\nInput >> ");
     safeScanf(&userKey[0]);
     return;
@@ -117,7 +117,7 @@ u8 writeCipherSheet(u8* dataOUT)
 {
     int option = 0;
 
-    system("cls");
+    system("clear");
 
     printf("Do you wish to store enciphered data in the cipher sheet?\n(1) Yes\n(2) No\nInput >> ");
 
@@ -132,7 +132,7 @@ u8 readCipherSheet(u8* dataIN)
 {
     int option = 0;
 
-    system("cls");
+    system("clear");
 
     printf("Retrieve cipher from sheet?\n(1) Yes\n(2) No\nInput >> ");
 

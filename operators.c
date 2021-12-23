@@ -10,31 +10,26 @@
 
 static void safeScanf(u8* dataIN)
 {
-    /** @brief          scans user input, stores in array and masks input with '*'
+    /** @brief          scans user input, stores in array
      *  @param dataIN   pointer to byte array  
     */
-    u8 ch = 0;
+    u8 ch = (u8)( getchar() );
     u8 I = 0;
-
     while( I < MAX_SIZE )
     {
-        ch = getch();
-        if( ch == 0x0D) 
-        {
-            printf("\n");
-            return;
-        }
-
-        else
-        {
-            dataIN[I] = ch;   
-            ch = '*';
-            printf("%c", ch);
-        }
-
-        I++;
+      ch = getchar();
+      if( ch == 0x0A )
+      {
+        ch == '\0';
+        dataIN[ I ] = ch;
+        return;
+      }
+      else
+      {
+        dataIN[ I ] = ch;
+        ++I;
+      }
     }
-    printf("\n");
     return;
 }
 
