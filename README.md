@@ -15,7 +15,7 @@ The following steps marked with a ✔️  are already implemented and have been 
 
 # About me:
 Hello and welcome to this repository page. Feel free to get in contact with me or to contribute to this project. It is a small personal project that I intend to make it grow.
-I am an electrical engineer specialized in the telecommunications field and I just recently arrived in the work market. My knowledge around programming practices in industry is really limited, so any advice is greatly appreciated.
+I am an electrical engineer specialized in the telecommunications field and I recently arrived in the work market. My knowledge around programming practices in industry is really limited, so any advice is greatly appreciated.
 My emails are listed bellow:
 
 :incoming_envelope: antoniovitor.gb@gmail.com
