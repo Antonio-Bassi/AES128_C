@@ -29,6 +29,7 @@ int main(void)
     {
         system(SYS_CLI);
         printf(WELCOME_PROMPT);
+        printf(MODE_PROMPT);
         printf(MENU_PROMPT);
         scanf("%d", &option);
 

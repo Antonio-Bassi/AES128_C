@@ -34,7 +34,7 @@ static u32 subWord(u32 doubleWord)
    u8 tmp = 0;
    u32 sDoubleWord = 0;
 
-    while (byteNum < N_KEY)
+    while (byteNum < N_BLOCKS)
     {
         tmp = ( u8 )( ( doubleWord ) >> ( byteNum * 8 ) );
         tmp = subBytes(tmp);
@@ -45,13 +45,13 @@ static u32 subWord(u32 doubleWord)
     return sDoubleWord;
 }
 
-static void subState(u8 (*stateBuffer)[N_KEY])
+static void subState(u8 (*stateBuffer)[N_BLOCKS])
 {
     /** @brief             Performs sub-bytes transformation on given state.
      *  @param stateBuffer pointer to first array of state entity to be mapped to the s-Box
      * 
     */
-    for (u8 R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_BLOCKS; R++)
     {
         for (u8 C = 0; C < N_BLOCKS; C++)
         {
@@ -84,7 +84,7 @@ static u32 invSubWord(u32 sDoubleWord)
    u8 tmp = 0;
    u32 doubleWord = 0;
 
-    while (byteNum < N_KEY)
+    while (byteNum < N_BLOCKS)
     {
         tmp = ( u8 )( ( doubleWord ) >> ( byteNum * 8 ) );
         tmp = invSubBytes(tmp);
@@ -95,13 +95,13 @@ static u32 invSubWord(u32 sDoubleWord)
     return doubleWord;
 }
 
-static void invSubState(u8 (*stateBuffer)[N_KEY])
+static void invSubState(u8 (*stateBuffer)[N_BLOCKS])
 {
     /** @brief             Performs inverse sub-bytes transformation on given state.
      *  @param stateBuffer pointer to first array of state entity to be mapped back from the s-Box
      * 
     */
-    for (u8 R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_BLOCKS; R++)
     {
         for (u8 C = 0; C < N_BLOCKS; C++)
         {
@@ -111,14 +111,14 @@ static void invSubState(u8 (*stateBuffer)[N_KEY])
     return;
 }
 
-static void shiftRows(u8 (*stateBuffer)[N_KEY])
+static void shiftRows(u8 (*stateBuffer)[N_BLOCKS])
 {
     /** @brief              shifts rows from state entity.
      *  @param stateBuffer  pointer to first array of state entity.
     */
     u32 tmp = 0;
 
-    for (u8 R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_BLOCKS; R++)
     {
         tmp = wordRow(stateBuffer, R);
         tmp = cyclicalShift(tmp, R);
@@ -131,7 +131,7 @@ static void shiftRows(u8 (*stateBuffer)[N_KEY])
     return;
 }
 
-static void invShiftRows(u8 (*stateBuffer)[N_KEY])
+static void invShiftRows(u8 (*stateBuffer)[N_BLOCKS])
 {
     /** @brief              performs the inverse shift rows on state entity
      *  @param stateBuffer  pointer to first array of state entity.
@@ -139,7 +139,7 @@ static void invShiftRows(u8 (*stateBuffer)[N_KEY])
 
    u32 tmp = 0;
 
-   for (u8 R = 0; R < N_KEY; R++)
+   for (u8 R = 0; R < N_BLOCKS; R++)
     {
        tmp = wordRow(stateBuffer, R);
        tmp = invCyclicalShift(tmp, R);
@@ -152,13 +152,13 @@ static void invShiftRows(u8 (*stateBuffer)[N_KEY])
     return;
 }
 
-static void mixColumns(u8 (*stateBuffer)[N_KEY])
+static void mixColumns(u8 (*stateBuffer)[N_BLOCKS])
 {
     /** @brief              perform mix columns transformations on state.
      *  @param stateBuffer  pointer to first array of state entity.
     */
     u8 C = 0;
-    u8 tmp[N_BLOCKS][N_KEY] = {0};
+    u8 tmp[N_BLOCKS][N_BLOCKS] = {0};
 
     matcpy(stateBuffer, tmp);
     
@@ -173,13 +173,13 @@ static void mixColumns(u8 (*stateBuffer)[N_KEY])
     return;
 }
 
-static void invMixColumns(u8 (*stateBuffer)[N_KEY])
+static void invMixColumns(u8 (*stateBuffer)[N_BLOCKS])
 {
     /** @brief              perform the inverse mix columns transformations on state.
      *  @param stateBuffer  pointer to first array of state entity.
     */
     u8 C = 0;
-    u8 tmp[N_BLOCKS][N_KEY] = {0};
+    u8 tmp[N_BLOCKS][N_BLOCKS] = {0};
 
     matcpy(stateBuffer, tmp);
 
@@ -222,7 +222,7 @@ static void keyExpansion(u8* userKey, u32* keySched)
     }
 }
 
-static void addRoundKey(u8 roundNum, u8 (*stateBuffer)[N_KEY], u32* keySched)
+static void addRoundKey(u8 roundNum, u8 (*stateBuffer)[N_BLOCKS], u32* keySched)
 {
     /** @brief              adds round key from key schedule to given state
      *  @param roundNum     ongoing cryptography round.
@@ -233,10 +233,10 @@ static void addRoundKey(u8 roundNum, u8 (*stateBuffer)[N_KEY], u32* keySched)
     u8 keyIndex = roundNum * N_BLOCKS;
     u32 tmp = 0;
 
-    for (u8 C = 0; C < N_KEY; C++)
+    for (u8 C = 0; C < N_BLOCKS; C++)
     {
         tmp = wordColumn(stateBuffer, C);
-    	tmp ^= keySched[keyIndex];
+      	tmp ^= keySched[keyIndex];
 
         for (u8 R = 0; R < N_BLOCKS; R++)
         {

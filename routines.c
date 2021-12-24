@@ -44,7 +44,7 @@ void beginCipher(u8* dataIN, u8* dataOUT, u8* userKey)
      *  @param userKey      pointer to userKey array.
     */
     u8 memOffset = 0;    
-    u8 stateBuffer[N_KEY][N_BLOCKS] = {0};
+    u8 stateBuffer[N_BLOCKS][N_BLOCKS] = {0};
     u32 keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
     u8 cipherIN[N_KEY * N_BLOCKS] = {0};
 
@@ -84,7 +84,7 @@ void beginInverseCipher(u8* dataIN, u8* dataOUT, u8* userKey)
     */
 
     u8 memOffset = 0;    
-    u8 stateBuffer[N_KEY][N_BLOCKS] = {0};
+    u8 stateBuffer[N_BLOCKS][N_BLOCKS] = {0};
     u32 keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
     u8 cipherIN[N_KEY * N_BLOCKS] = {0};
 

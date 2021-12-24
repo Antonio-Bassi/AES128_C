@@ -49,14 +49,14 @@ static void load(u8* dataIN, u8* cipherIN, u8 memOffset)
     return;
 }
 
-static void write(u8* dataOUT, u8 (*stateBuffer)[N_KEY], u8 memOffset)
+static void write(u8* dataOUT, u8 (*stateBuffer)[N_BLOCKS], u8 memOffset)
 {
     /** @brief              writes cipher output to buffer.
      *  @param dataOUT      pointer to output array.
-     *  @param stateBuffer  pointer to an array of N_KEY Bytes.
+     *  @param stateBuffer  pointer to an array of N_BLOCKS Bytes.
      *  @param memOffset    memory offset, integer number varying from 0 to 3.
     */
-    for (u8 R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_BLOCKS; R++)
     {
         for (u8 C = 0; C < N_BLOCKS; C++)
         {
@@ -90,13 +90,13 @@ static void cleanBuffer(u8* dataBuffer)
    }
 }
 
-static void state(u8* dataIN, u8 (*stateBuffer)[N_KEY] )
+static void state(u8* dataIN, u8 (*stateBuffer)[N_BLOCKS] )
 {
     /** @brief              re-organize input array into a state matrix.
      *  @param dataIN       pointer to byte array.
-     *  @param stateBuffer  pointer to an array of N_KEY Bytes.
+     *  @param stateBuffer  pointer to an array of N_BLOCKS Bytes.
     */
-    for (u8 R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_BLOCKS; R++)
     {
         for (u8 C = 0; C < N_BLOCKS; C++)
         {
@@ -107,17 +107,17 @@ static void state(u8* dataIN, u8 (*stateBuffer)[N_KEY] )
     return;
 }
 
-static u32 wordRow(u8 (*stateBuffer)[N_KEY], u8 row)
+static u32 wordRow(u8 (*stateBuffer)[N_BLOCKS], u8 row)
 {
     /** @brief              extracts bytes from stateBuffer rows and creates 32-bit "words" with them.
-     *  @param stateBuffer  pointer to an array of N_KEY Bytes.
+     *  @param stateBuffer  pointer to an array of N_BLOCKS Bytes.
      *  @param row          desired row from state to be converted into a single doubleword entity.
     */
 
     u32 word = 0;
     u8 C = 0;
 
-    while( C < N_KEY )
+    while( C < N_BLOCKS )
     {
         word |= ( (u32) stateBuffer[row][C] ) << ( 8 * C );
         C++;
@@ -126,10 +126,10 @@ static u32 wordRow(u8 (*stateBuffer)[N_KEY], u8 row)
     return word;
 }
 
-static u32 wordColumn(u8 (*stateBuffer)[N_KEY], u8 column)
+static u32 wordColumn(u8 (*stateBuffer)[N_BLOCKS], u8 column)
 {
     /** @brief              extracts bytes from stateBuffer columns and creates 32-bit words with them.
-     *  @param stateBuffer  pointer to an array of N_KEY bytes.
+     *  @param stateBuffer  pointer to an array of N_BLOCKS bytes.
      *  @param column       desired column from state to be converted into a single doubleword entity. 
     */
 
@@ -146,13 +146,13 @@ static u32 wordColumn(u8 (*stateBuffer)[N_KEY], u8 column)
    
 }
 
-static void matcpy(u8 (*stateBuffer)[N_KEY], u8 (*tmpBuffer)[N_KEY])
+static void matcpy(u8 (*stateBuffer)[N_BLOCKS], u8 (*tmpBuffer)[N_BLOCKS])
 {
     /** @brief              copies elements from stateBuffer to tmpBuffer
      *  @param stateBuffer  state containing elements to be copied.
      *  @param tmpBuffer    buffer to store copied content. 
     */
-    for (u8 R = 0; R < N_KEY; R++)
+    for (u8 R = 0; R < N_BLOCKS; R++)
     {
         for (u8 C = 0; C < N_BLOCKS; C++)
         {
