@@ -1,7 +1,7 @@
 /**************************************************************************************
- * @file    params.h
+ * @file    lx_params.h
  * @author  Antonio Vitor Grossi Bassi
- * @brief   Header file containing necessary libraries, macros, function prototypes, etc.
+ * @brief   Header file containing necessary libraries and macros for linux based OS.
  ************************************************************************************** 
  * @note contact info: antoniovitor.gb@gmail.com
  * @note contact info: antonio.bassi@sprace.org.br
@@ -11,8 +11,8 @@
 #ifndef LX_PARAMS_H_
 #define LX_PARAMS_H_
 
-#define IS_AES128 0
-#define IS_AES192 1
+#define IS_AES128 1
+#define IS_AES192 0
 #define IS_AES256 0
 
 #if IS_AES128
@@ -112,7 +112,8 @@ u32 rCon[11] =
 /* Function Prototypes */
 
 /* Source Codes */
-#include "operations.c"
+#include "aesmanip.c"
+#include "operators.c"
 #include "files.c"
 #include "routines.c"
 

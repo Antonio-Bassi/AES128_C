@@ -146,7 +146,6 @@ int main(void)
             cleanBuffer( &output[0] );
             system(SYS_CLI);
         }
-
         else; /* restart the loop */
     }
 }

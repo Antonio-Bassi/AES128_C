@@ -1,15 +1,53 @@
 /**************************************************************************************
- * @file    params.h
+ * @file    win_params.h
  * @author  Antonio Vitor Grossi Bassi
- * @brief   Header file containing necessary libraries, macros, function prototypes, etc.
+ * @brief   Header file containing necessary libraries and macros for windows based OS
  ************************************************************************************** 
  * @note contact info: antoniovitor.gb@gmail.com
  * @note contact info: antonio.bassi@sprace.org.br
  **************************************************************************************
 */
 
-#ifndef PARAMS_H_
-#define PARAMS_H_
+#ifndef WIN_PARAMS_H_
+#define WIN_PARAMS_H_
+
+#define IS_AES128 1
+#define IS_AES192 0
+#define IS_AES256 0
+
+#if IS_AES128
+
+  #define N_KEY       4                               // Number of Words present inside given Key
+  #define N_BLOCKS    4                               // Number of 32 bit data blocks
+  #define N_ROUNDS    10                              // Number of cryptography rounds
+  #define MAX_SIZE    4 * N_KEY * N_BLOCKS            // Max size of key and ciphertext arrays.
+  #define MODE_PROMPT "You Are Using AES-128 mode\n"  // User notification
+
+#elif IS_AES192
+
+  #define N_KEY       6                               // Number of Words present inside given Key
+  #define N_BLOCKS    4                               // Number of 32 bit data blocks
+  #define N_ROUNDS    12                              // Number of cryptography rounds
+  #define MAX_SIZE    4 * N_KEY * N_BLOCKS            // Max size of key and ciphertext arrays.
+  #define MODE_PROMPT "You are using AES-192 mode\n"  // User notification
+
+#elif IS_AES256
+
+  #define N_KEY       8                               // Number of Words present inside given Key
+  #define N_BLOCKS    4                               // Number of 32 bit data blocks
+  #define N_ROUNDS    14                              // Number of cryptography rounds
+  #define MAX_SIZE    4 * N_KEY * N_BLOCKS            // Max size of key and ciphertext arrays.
+  #define MODE_PROMPT "You are using AES-256 mode\n"  // User notification
+
+#else
+
+  #define N_KEY       4                                                    // Number of Words present inside given Key
+  #define N_BLOCKS    4                                                    // Number of 32 bit data blocks
+  #define N_ROUNDS    10                                                   // Number of cryptography rounds
+  #define MAX_SIZE    4 * N_KEY * N_BLOCKS                                 // Max size of key and ciphertext arrays.
+  #define MODE_PROMPT "No mode has been configured, using AES-128 mode\n"  // User notification
+
+#endif
 
 /* Standard C */
 #include <stdlib.h>
@@ -23,11 +61,6 @@
 #define INVERSE_MAP 0X05    // Inverse S-Box constant    
 #define RIJNDAEL_P  0x11B   // Rijndael's polynomial
 
-#define N_KEY       4                       // Number of Words present inside given Key
-#define N_BLOCKS    4                       // Number of 32 bit data blocks
-#define N_ROUNDS    10                      // Number of cryptography rounds
-#define MAX_SIZE    4 * N_KEY * N_BLOCKS    // Max size of key and ciphertext arrays.
-
 /* Error codes */
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
@@ -35,8 +68,8 @@
 #define EXIT_UNKNWN  3
 
 /* Interface related macros */
-#define SYS_CLI "cls"
-#define WELCOME_PROMPT "Personal Cryptographer Win0.0\n"
+#define SYS_CLI "clear"
+#define WELCOME_PROMPT "Personal Cryptographer lx0.0\n"
 #define MENU_PROMPT "Welcome, what do you wish to do?\n(1) Encrypt\n(2) Decrypt\n(3) Quit\nInput >> "
 
 #define W_SUCCESS_PROMPT "Ciphertext successfully written. \nPress <Enter> key to continue."
@@ -61,7 +94,8 @@ typedef signed int s32;
 
 /* Global Variables */
 u32 rCon[11] = 
-{ 0x00000000,
+{ 
+  0x00000000,
   0x00000001,
   0x00000002,
   0x00000004,
@@ -77,8 +111,9 @@ u32 rCon[11] =
 /* Function Prototypes */
 
 /* Source Codes */
-#include "operations.c"
+#include "aesmanip.c"
+#include "operators.c"
 #include "files.c"
 #include "routines.c"
 
-#endif
+#endif /* WIN_PARAMS_H_ */

@@ -46,14 +46,11 @@ void beginCipher(u8* dataIN, u8* dataOUT, u8* userKey)
     u8 memOffset = 0;    
     u8 stateBuffer[N_BLOCKS][N_BLOCKS] = {0};
     u32 keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
-    u8 cipherIN[N_KEY * N_BLOCKS] = {0};
 
     keyExpansion(&userKey[0], &keySched[0]);
     while ( memOffset < N_BLOCKS )
     {
-        load(&dataIN[0], &cipherIN[0], memOffset);
-        state(&cipherIN[0], stateBuffer);
-
+        state(&dataIN[0], stateBuffer, memOffset);
         /* the cryptography begins here */
         addRoundKey(0, stateBuffer, &keySched[0]);
         for(u8 round = 1; round < N_ROUNDS; round++)
@@ -86,14 +83,11 @@ void beginInverseCipher(u8* dataIN, u8* dataOUT, u8* userKey)
     u8 memOffset = 0;    
     u8 stateBuffer[N_BLOCKS][N_BLOCKS] = {0};
     u32 keySched[N_BLOCKS * (N_ROUNDS + 1)] = {0};
-    u8 cipherIN[N_KEY * N_BLOCKS] = {0};
 
     keyExpansion(&userKey[0], &keySched[0]);
     while (memOffset < N_BLOCKS)
     {
-        load(&dataIN[0], &cipherIN[0], memOffset);
-        state(&cipherIN[0], stateBuffer);
-
+        state(&dataIN[0], stateBuffer, memOffset);
         addRoundKey(10, stateBuffer, &keySched[0]);
         for(u8 round = N_ROUNDS - 1; round > 0; round--)
         {
