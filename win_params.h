@@ -68,8 +68,8 @@
 #define EXIT_UNKNWN  3
 
 /* Interface related macros */
-#define SYS_CLI "clear"
-#define WELCOME_PROMPT "Personal Cryptographer lx0.0\n"
+#define SYS_CLI "cls"
+#define WELCOME_PROMPT "Personal Cryptographer Win0.0\n"
 #define MENU_PROMPT "Welcome, what do you wish to do?\n(1) Encrypt\n(2) Decrypt\n(3) Quit\nInput >> "
 
 #define W_SUCCESS_PROMPT "Ciphertext successfully written. \nPress <Enter> key to continue."
