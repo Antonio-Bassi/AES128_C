@@ -33,22 +33,6 @@ static void safeScanf(u8* dataIN)
     return;
 }
 
-static void load(u8* dataIN, u8* cipherIN, u8 memOffset)
-{
-    /** @brief           loads data from user input into 16 byte array to be processed according to given offset.
-     *  @param dataIN    input buffer.
-     *  @param cipherIN  cipher input (will be subsequently turned into a state).
-     *  @param memOffset memory offset, integer number varying from 0 to 3.
-    */
-    u8 I = 0;
-    while( I < 4 * N_BLOCKS )
-    {
-        cipherIN[I] = dataIN[I + 16 * memOffset ];
-        I++;
-    }
-    return;
-}
-
 static void write(u8* dataOUT, u8 (*stateBuffer)[N_BLOCKS], u8 memOffset)
 {
     /** @brief              writes cipher output to buffer.
