@@ -3,8 +3,8 @@
  * @author  Antonio Vitor Grossi Bassi
  * @brief   Header file containing necessary libraries and macros for windows based OS
  ************************************************************************************** 
- * @note contact info: antoniovitor.gb@gmail.com
- * @note contact info: antonio.bassi@sprace.org.br
+ * @note contact info -> antoniovitor.gb@gmail.com
+ *                    -> antonio.bassi@sprace.org.br
  **************************************************************************************
 */
 
@@ -92,27 +92,9 @@ typedef unsigned int u32;
 typedef unsigned long long u64; 
 typedef signed int s32;
 
-/* Global Variables */
-u32 rCon[11] = 
-{ 
-  0x00000000,
-  0x00000001,
-  0x00000002,
-  0x00000004,
-  0x00000008,
-  0x00000010,
-  0x00000020,
-  0x00000040,
-  0x00000080,
-  0x0000001b,
-  0x00000036,
-};
-
 /* Function Prototypes */
 
 /* Source Codes */
-#include "aesmanip.c"
-#include "operators.c"
 #include "files.c"
 #include "routines.c"
 

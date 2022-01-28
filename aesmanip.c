@@ -3,8 +3,8 @@
  * @author  Antonio Vitor Grossi Bassi
  * @brief   data structure manipulations for AES algorithm.
  **************************************************************************************
- * @note contact info: antoniovitor.gb@gmail.com
- * @note contact info: antonio.bassi@sprace.org.br
+ * @note contact info -> antoniovitor.gb@gmail.com
+ *                    -> antonio.bassi@sprace.org.br
  ************************************************************************************** 
 */
 

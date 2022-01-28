@@ -1,3 +1,14 @@
+/* ****************************************************** 
+ * @file    params.h
+ * @author  Antonio Vitor Grossi Bassi
+ * @brief   Header file for enviroment adaptation
+ * ******************************************************
+ * @note contact info -> antoniovitor.gb@gmail.com
+ *                    -> antonio.bassi@sprace.org.br
+ * ******************************************************
+*/
+
+
 #ifndef PARAMS_H_
 #define PARAMS_H_
 

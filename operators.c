@@ -45,6 +45,19 @@ static u8 GF256_inv(u8 num_A)
     return EXIT_FAILURE;
 }
 
+static u32 rCon(u8 val)
+{
+    /** @brief Computes round constant for key expansion algorithm
+     *  @param val  Integer number that is the relationship of the 
+     *              iteration number and number of keys 
+     *  
+     *
+    */
+    if( val == 9 ) return 0x1b;
+    else if( val == 10 ) return 0x36;
+    else return 0x01 << ( val - 1 ); 
+}
+
 static u8 subBytes(u8 byte)
 {
     /** @brief      performs sub-bytes transformation on given byte.
@@ -247,7 +260,7 @@ static void keyExpansion(u8* userKey, u32* keySched)
     while( I < N_BLOCKS * (N_ROUNDS + 1) )
     {
         tmp = keySched[I - 1];
-        if((I % N_KEY) == 0) tmp = subWord( rotWord(tmp) ) ^ rCon[I/N_KEY];
+        if((I % N_KEY) == 0) tmp = subWord( rotWord(tmp) ) ^ rCon(I/N_KEY);
         else if( (N_KEY > 6) & (I % N_KEY == 4) ) tmp = subWord( tmp );
         else; /* do nothing */
         keySched[I] = keySched[I - N_KEY] ^ tmp;

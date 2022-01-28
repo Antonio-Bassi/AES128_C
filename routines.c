@@ -8,6 +8,9 @@
  ************************************************************************************** 
 */
 
+#include "aesmanip.c"
+#include "operators.c"
+
 void requestInput(u8* dataIN, u8* userKey)
 {
     /** @brief              requests user input and key
@@ -68,7 +71,7 @@ void beginCipher(u8* dataIN, u8* dataOUT, u8* userKey)
         memOffset++;    /* repeats for each state block present */
     }    
     cleanKey( &userKey[0] );
-    cleanBuffer(&dataIN[0]);
+    cleanBuffer( &dataIN[0] );
     return;
 }
 
