@@ -3,7 +3,7 @@ AES128_C is an implementation of the Advanced Encryption Standards using 128-bit
 Right now the project is under development, the main intention is to create a terminal cryptographer with a minimalist user interface. Future plans include a creation of a cryptography API for embedded systems to use with a integration interface to make integration feasible and promptly done.
 
 # What is going on right now?
-linux branch was merged into the main branch, the OS adaptation worked fine and program now works on both linux and windows environments. The file handling interface still needs to be done.
+Linux branch was merged into the main branch, the OS adaptation worked fine and the program now works on both linux and windows environments. The file handling interface still needs to be done.
 
 # Progress:
 The following steps marked with a ✔️  are already implemented and have been tested, steps marked with ⚠️  need to be implemented and tested and steps marked with a :hammer_and_wrench: are currently under development
